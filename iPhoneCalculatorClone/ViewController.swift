@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 enum CurrentParameter{
     case first, second, result
@@ -31,6 +32,7 @@ class ViewController: UIViewController {
     //
     
     @IBOutlet var label: UILabel!
+ 
     @IBOutlet weak var ACButton: UIButton!
     @IBOutlet weak var plusOrMinusButton: UIButton!
     @IBOutlet weak var persentageButton: UIButton!
@@ -119,9 +121,9 @@ class ViewController: UIViewController {
             resultString =  "\(parameterOneNumber + parameterTwoNumber)"
         case "-":
             resultString =  "\(parameterOneNumber - parameterTwoNumber)"
-        case "*":
+        case "×":
             resultString =  "\(parameterOneNumber * parameterTwoNumber)"
-        case "/":
+        case "÷":
             resultString =  "\(parameterOneNumber / parameterTwoNumber)"
         default:
             resultString =  ""
@@ -136,10 +138,10 @@ class ViewController: UIViewController {
         case "-":
             minusButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             minusButton.setTitleColor(UIColor.orange, for: .normal)
-        case "*":
+        case "×":
             multiplicationButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             multiplicationButton.setTitleColor(UIColor.orange, for: .normal)
-        case "/":
+        case "÷":
             divisionButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             divisionButton.setTitleColor(UIColor.orange, for: .normal)
         default:
@@ -154,10 +156,10 @@ class ViewController: UIViewController {
         case "-":
             minusButton.backgroundColor = UIColor.orange
             minusButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        case "*":
+        case "×":
             multiplicationButton.backgroundColor = UIColor.orange
             multiplicationButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        case "/":
+        case "÷":
             divisionButton.backgroundColor = UIColor.orange
             divisionButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         default:
@@ -176,44 +178,15 @@ class ViewController: UIViewController {
     //
     
     // Number buttons
-    
-    @IBAction func zeroButtonPressed(_ sender: Any) {
-        registerButton(number: "0")
+    @IBAction func numberButtonPressed(sender: UIButton){
+        AudioServicesPlaySystemSound(SystemSoundID(0x450))
+        registerButton(number: (sender.titleLabel?.text)!)
     }
-    @IBAction func oneButtonPressed(_ sender: Any) {
-        registerButton(number: "1")
-    }
-    @IBAction func twoButtonPressed(_ sender: Any) {
-        registerButton(number: "2")
-    }
-    @IBAction func threeButtonPressed(_ sender: Any) {
-        registerButton(number: "3")
-    }
-    @IBAction func fourButtonPressed(_ sender: Any) {
-        registerButton(number: "4")
-    }
-    @IBAction func fiveButtonPressed(_ sender: Any) {
-        registerButton(number: "5")
-    }
-    @IBAction func sixButtonPressed(_ sender: Any) {
-        registerButton(number: "6")
-    }
-    @IBAction func sevenButtonPressed(_ sender: Any) {
-        registerButton(number: "7")
-    }
-    @IBAction func eightButtonPressed(_ sender: Any) {
-        registerButton(number: "8")
-    }
-    @IBAction func nineButtonPressed(_ sender: Any) {
-        registerButton(number: "9")
-    }
-    @IBAction func dotButtonPressed(_ sender: Any) {
-        registerButton(number: ".")
-    }
-    
+
     // Operations buttons
 
     @IBAction func ACButtonPressed(_ sender: Any) {
+        AudioServicesPlaySystemSound(SystemSoundID(0x450))
         ACButton.setTitle("AC", for: .normal)
         parameterOneString.removeAll()
         parameterTwoString.removeAll()
@@ -224,6 +197,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func plusOrMinusButtonPressed(_ sender: Any) {
+        AudioServicesPlaySystemSound(SystemSoundID(0x450))
         switch currentParameter {
         case .first:
             if parameterOneNumber > 0{
@@ -256,6 +230,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func persentageButtonPressed(_ sender: Any) {
+        AudioServicesPlaySystemSound(SystemSoundID(0x450))
         switch currentParameter {
         case .first:
             parameterOneString = "\(parameterOneNumber / 100)"
@@ -268,73 +243,17 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func plusButtonPressed(_ sender: UIButton) {
-        operation = "+"
+    @IBAction func operationButtonPressed(_ sender: UIButton){
+        AudioServicesPlaySystemSound(SystemSoundID(0x450))
+        operation = (sender.titleLabel?.text?.first)!
         currentParameter = .second
         putButtonInActiveState()
-
     }
-    @IBAction func minusButtonPressed(_ sender: UIButton) {
-        operation = "-"
-        currentParameter = .second
-        sender.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        sender.setTitleColor(UIColor.orange, for: .normal)
-    }
-    @IBAction func multiplyButtonPressed(_ sender: UIButton) {
-        operation = "*"
-        currentParameter = .second
-        sender.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        sender.setTitleColor(UIColor.orange, for: .normal)
-    }
-    @IBAction func divisionButtonPressed(_ sender: UIButton) {
-        operation = "/"
-        currentParameter = .second
-        sender.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        sender.setTitleColor(UIColor.orange, for: .normal)
-    }
- 
+    
     @IBAction func equalButtonPressed(_ sender: Any) {
+        AudioServicesPlaySystemSound(SystemSoundID(0x450))
         currentParameter = .result
         getResultString()
         updateLabel()
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
